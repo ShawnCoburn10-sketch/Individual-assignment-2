@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .login-container {
+            margin: 100px auto;
+            padding: 20px;
+            max-width: 400px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login to ClearView Optics</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter Username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter Password" required minlength="8">
+        <button type="button" onclick="validateLogin()"><a href="file:///home/chronos/u-f3d15fa2f5ebd02ff8b39efe4c05923c3e852f04/MyFiles/Downloads/CIT%202001%20Web%20Programming/Labs/individual%20assignment%202/Products%20Page.html">Login</a></button>
+    </form>
+    <p id="error-message" style="color:red;"></p>
+</div>
+
+<script>
+    // Predefined login credentials
+    const validUsername = "User101";
+    const validPassword = "password101";
+
+    let attempts = 0;
+
+    function validateLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+
+        if (username === validUsername && password === validPassword) {
+            window.location.href = 'file:///home/chronos/u-f3d15fa2f5ebd02ff8b39efe4c05923c3e852f04/MyFiles/Downloads/CIT%202001%20Web%20Programming/Labs/individual%20assignment%202/Products%20Page.html'; // Redirect to products page
+        } else {
+            attempts++;
+            errorMessage.textContent = 'Invalid username or password!';
+            if (attempts >= 3) {
+                window.location.href = 'error.html'; // Redirect to error page after 3 tries
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Products Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product-item {
+            width: 30%;
+            background-color: white;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Our Products</h2>
+<div class="product-list" id="productList">
+    <!-- Products will be generated here -->
+    <img src="Asset for Individual Assignment 2/2150670742.jpg" alt="Blue framed blue tinted glasses">
+    <img src="Asset for Individual Assignment 2/2150670749.jpg" alt="Gold frame glasses">
+    <img src="Asset for Individual Assignment 2/2150670770.jpg" alt="Blue framed glasses with no tint">
+    <img src="Asset for Individual Assignment 2/2150670740.jpg" alt="Clear framed glasses">
+    <img src="Asset for Individual Assignment 2/2150670763.jpg" alt="Green framed glasses">
+    <img src="Asset for Individual Assignment 2/2148290327.jpg" alt="Pinked framed glasses">
+    <img src="Asset for Individual Assignment 2/2148310027.jpg" alt="Black framed reading glasses">
+    <img src="Asset for Individual Assignment 2/2150163180.jpg" alt="Clear framed butter fly shaped glasses">
+    <img src="Asset for Individual Assignment 2/64600.jpeg" alt="Poco-dot skined blue tinted glasses">
+</div>
+<button onclick="checkout()"><a href="file:///home/chronos/u-f3d15fa2f5ebd02ff8b39efe4c05923c3e852f04/MyFiles/Downloads/CIT%202001%20Web%20Programming/Labs/individual%20assignment%202/Invoice%20Page.html" >CheckOut</a></button>
+<button onclick="cancel()">Cancel</button>
+<button onclick="exit()"><a href="file:///home/chronos/u-f3d15fa2f5ebd02ff8b39efe4c05923c3e852f04/MyFiles/Downloads/CIT%202001%20Web%20Programming/Labs/individual%20assignment%202/Login%20Form(2).html">Exit</a></button>
+
+<script>
+    const products = [
+        { id: 1, name: "Product 1", price: 10 },
+        { id: 2, name: "Product 2", price: 20 },
+        { id: 3, name: "Product 3", price: 30 },
+        { id: 4, name: "Product 4", price: 40 },
+        { id: 5, name: "Product 5", price: 50 },
+        { id: 6, name: "Product 6", price: 60 },
+        { id: 7, name: "Product 7", price: 70 },
+        { id: 8, name: "Product 8", price: 80 },
+        { id: 9, name: "Product 9", price: 90 },
+    ];
+
+    function displayProducts() {
+        const productList = document.getElementById('productList');
+        products.forEach(product => {
+            const productItem = document.createElement('div');
+            productItem.classList.add('product-item');
+            productItem.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price}</p>
+                <input type="checkbox" id="product-${product.id}" name="product-${product.id}">
+            `;
+            productList.appendChild(productItem);
+        });
+    }
+
+    function checkout() {
+        let selectedProducts = [];
+        products.forEach(product => {
+            const checkbox = document.getElementById(`product-${product.id}`);
+            if (checkbox && checkbox.checked) {
+                selectedProducts.push(product);
+            }
+        });
+        localStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+        window.location.href = 'file:///home/chronos/u-f3d15fa2f5ebd02ff8b39efe4c05923c3e852f04/MyFiles/Downloads/CIT%202001%20Web%20Programming/Labs/individual%20assignment%202/Invoice%20Page(2).html'; // Redirect to invoice page
+    }
+
+    function cancel() {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    }
+
+    function exit() {
+        window.location.href = 'file:///home/chronos/u-f3d15fa2f5ebd02ff8b39efe4c05923c3e852f04/MyFiles/Downloads/CIT%202001%20Web%20Programming/Labs/individual%20assignment%202/Login%20Form(2).html'; // Redirect back to login
+    }
+
+    displayProducts();
+</script>
+
+</body>
+</html>

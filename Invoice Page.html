@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Invoice Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .invoice {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice">
+    <h2>Invoice</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="invoiceBody">
+            <!-- Invoice items will be generated here -->
+        </tbody>
+    </table>
+    <p><strong>Total: $<span id="totalAmount">0</span></strong></p>
+    <button onclick="cancel()">Cancel</button>
+    <button onclick="exit()">Exit</button>
+</div>
+
+<script>
+    const taxRate = 0.15;
+    let total = 0;
+
+    function loadInvoice() {
+        const selectedProducts = JSON.parse(localStorage.getItem('selectedProducts'));
+        const invoiceBody = document.getElementById('invoiceBody');
+
+        selectedProducts.forEach(product => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${product.name}</td><td>$${product.price}</td>`;
+            invoiceBody.appendChild(row);
+            total += product.price;
+        });
+
+        document.getElementById('totalAmount').textContent = (total + (total * taxRate)).toFixed(2);
+    }
+
+    function cancel() {
+        window.location.href = 'products.html'; // Redirect back to products
+    }
+
+    function exit() {
+        window.location.href = 'login.html'; // Redirect back to login
+    }
+
+    loadInvoice();
+</script>
+
+</body>
+</html>
